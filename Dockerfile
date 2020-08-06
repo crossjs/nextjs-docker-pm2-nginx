@@ -4,20 +4,22 @@ FROM node:alpine
 WORKDIR /usr/app
 
 # Install PM2 globally
-RUN npm install --global pm2
+RUN yarn global add pm2
 
-# Copy "package.json" and "package-lock.json" before other files
+# Copy "package.json", "yarn.lock" and ".yarnrc" before other files
 # Utilise Docker cache to save re-installing dependencies if unchanged
-COPY ./package*.json ./
+COPY ./package.json ./
+COPY ./yarn.lock ./
+COPY ./.yarnrc ./
 
 # Install dependencies
-RUN npm install --production
+RUN yarn
 
 # Copy all files
 COPY ./ ./
 
 # Build app
-RUN npm run build
+RUN yarn build
 
 # Expose the listening port
 EXPOSE 3000

@@ -10,7 +10,11 @@ A second container with the [NGINX](https://www.nginx.com/) web server is used a
 
 ```bash
 docker-compose up
+
+# rebuild images with
+#  docker-compose up --build <nextjs | nginx>
 ```
+
 
 NGINX listens on port 80, which is the default HTTP port, so you can just visit **http://localhost/**
 
@@ -35,15 +39,34 @@ _Next.js container is referenced inside NGINX container as `nextjs`._
 
 PM2 commands can still be used inside a container with the `docker exec` command:
 
-```
+```bash
 docker exec -it <container-id> pm2 monit          # Monitoring CPU/Usage of each process
 ```
-```
+
+```bash
 docker exec -it <container-id> pm2 list           # Listing managed processes
 ```
-```
+
+```bash
 docker exec -it <container-id> pm2 show           # Get more information about a process
 ```
-```
+
+```bash
 docker exec -it <container-id> pm2 reload all     # 0sec downtime reload all applications
+```
+
+## Set Docker Mirror
+
+Edit Docker Desktop's Preferences > Docker Engine:
+
+```json
+{
+  ...
+  "registry-mirrors": [
+    "https://docker.mirrors.ustc.edu.cn",
+    "https://hub-mirror.c.163.com",
+    "https://mirror.baidubce.com"
+  ]
+  ...
+}
 ```
