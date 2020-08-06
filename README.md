@@ -4,17 +4,13 @@ This project is a production Docker setup for a Next.js app.
 
 The Next.js app is launched with [PM2 Runtime](https://pm2.io/runtime/), which is a Production Process Manager for Node.js applications and is used to keep the app alive forever.
 
-A second container with the [NGINX](https://www.nginx.com/) web server is used as a reverse proxy, and to handle HTTP caching.
+The container with the [NGINX](https://www.nginx.com/) web server is used as a reverse proxy, and to handle HTTP caching.
 
 ## Docker Compose
 
 ```bash
 docker-compose up
-
-# rebuild images with
-#  docker-compose up --build <nextjs | nginx>
 ```
-
 
 NGINX listens on port 80, which is the default HTTP port, so you can just visit **http://localhost/**
 
@@ -22,18 +18,20 @@ NGINX listens on port 80, which is the default HTTP port, so you can just visit 
 
 ```bash
 # Build images
-docker build --tag nextjs-image .
+docker build --tag blog-image ./blog
+docker build --tag home-image ./home
 docker build --tag nginx-image ./nginx
 
 # Create shared network
 docker network create my-network
 
 # Run containers
-docker run --network my-network --name nextjs-container nextjs-image
-docker run --network my-network --link nextjs-container:nextjs --publish 80:80 nginx-image
+docker run --network my-network --name blog-container blog-image
+docker run --network my-network --name home-container home-image
+docker run --network my-network --link blog-container:blog --link home-container:home --publish 80:80 nginx-image
 ```
 
-_Next.js container is referenced inside NGINX container as `nextjs`._
+_Next.js containers are referenced inside NGINX container as `blog` and `home`._
 
 ## PM2 commands
 
@@ -57,16 +55,14 @@ docker exec -it <container-id> pm2 reload all     # 0sec downtime reload all app
 
 ## Set Docker Mirror
 
-Edit Docker Desktop's Preferences > Docker Engine:
+Modify configurations in the Docker Desktop's Preferences > Docker Engine:
 
 ```json
 {
-  ...
   "registry-mirrors": [
     "https://docker.mirrors.ustc.edu.cn",
     "https://hub-mirror.c.163.com",
     "https://mirror.baidubce.com"
   ]
-  ...
 }
 ```

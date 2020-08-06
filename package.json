@@ -2,8 +2,6 @@
   "name": "nextjs-docker-pm2-nginx",
   "version": "1.0.0",
   "description": "Next.js with Docker, PM2 and NGINX",
-  "author": "Steve Holgado",
-  "license": "ISC",
   "scripts": {
     "home:dev": "cd home && next",
     "home:build": "cd home && next build",
