@@ -1,7 +1,9 @@
 version: '3'
 services:
-  nextjs: 
-    build: ./
+  blog: 
+    build: ./blog
+  home: 
+    build: ./home
   nginx: 
     build: ./nginx
     ports:

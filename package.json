@@ -5,13 +5,11 @@
   "author": "Steve Holgado",
   "license": "ISC",
   "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "next": "^9.5.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "home:dev": "cd home && next",
+    "home:build": "cd home && next build",
+    "home:start": "cd home && next start",
+    "blog:dev": "cd blog && next",
+    "blog:build": "cd blog && next build",
+    "blog:start": "cd blog && next start"
   }
 }
