@@ -1,15 +1,11 @@
 FROM node:alpine
 
 # Set working directory
-WORKDIR /usr/app
-
-# Install PM2 globally
-RUN yarn global add pm2
+WORKDIR /usr/app/home
 
 # Copy "package.json", "yarn.lock" and ".yarnrc" before other files
 # Utilise Docker cache to save re-installing dependencies if unchanged
 COPY ./package.json ./
-COPY ./yarn.lock ./
 COPY ./.yarnrc ./
 
 # Install dependencies
@@ -22,7 +18,10 @@ COPY ./ ./
 RUN yarn build
 
 # Expose the listening port
-EXPOSE 3000
+EXPOSE 3001
+
+# Install PM2 globally
+RUN npm install --global pm2
 
 # Run container as non-root (unprivileged) user
 # The "node" user is provided in the Node.js Alpine base image

@@ -18,8 +18,8 @@ NGINX listens on port 80, which is the default HTTP port, so you can just visit 
 
 ```bash
 # Build images
-docker build --tag blog-image ./blog
-docker build --tag home-image ./home
+docker build --tag blog-image ./packages/blog
+docker build --tag home-image ./packages/home
 docker build --tag nginx-image ./nginx
 
 # Create shared network

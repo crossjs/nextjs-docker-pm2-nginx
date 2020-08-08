@@ -1,10 +1,10 @@
 version: '3'
 services:
-  blog: 
-    build: ./blog
-  home: 
-    build: ./home
-  nginx: 
+  blog:
+    build: ./packages/blog
+  home:
+    build: ./packages/home
+  nginx:
     build: ./nginx
     ports:
       - 80:80
